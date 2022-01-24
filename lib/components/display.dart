@@ -11,7 +11,7 @@ class Display extends StatelessWidget {
     return Expanded(
       flex: 1,
       child: Container(
-        color: const Color.fromARGB(48, 48, 48, 1),
+        color: const Color.fromARGB(255, 48, 48, 48),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.stretch,
