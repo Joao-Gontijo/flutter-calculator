@@ -8,11 +8,23 @@ class Button extends StatelessWidget {
   final String text;
   final bool big;
   final Color color;
+  final void Function(String) cb; //callback
 
-  Button({required this.text, this.big = false, this.color = DEFAULT});
-  Button.big({required this.text, this.big = true, this.color = DEFAULT});
+  Button(
+      {required this.text,
+      this.big = false,
+      this.color = DEFAULT,
+      required this.cb});
+  Button.big(
+      {required this.text,
+      this.big = true,
+      this.color = DEFAULT,
+      required this.cb});
   Button.operation(
-      {required this.text, this.big = false, this.color = OPERATION});
+      {required this.text,
+      this.big = false,
+      this.color = OPERATION,
+      required this.cb});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +35,7 @@ class Button extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           primary: color,
         ),
-        onPressed: () {},
+        onPressed: () => cb(text),
         child: Text(
           text,
           style: const TextStyle(
