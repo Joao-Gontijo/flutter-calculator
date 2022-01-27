@@ -7,7 +7,7 @@ class Memory {
   String _value = '0';
   final _buffer = [0.0, 0.0];
   int _bufferIndex = 0;
-  late String operation;
+  late String _operation;
   bool _wipeValue = true;
 
   String get value {
@@ -25,6 +25,10 @@ class Memory {
   }
 
   _setOperation(String newOperation) {
+    if (_bufferIndex == 0) {
+      _operation = newOperation;
+      _bufferIndex = 1;
+    }
     _wipeValue = true;
   }
 
@@ -49,6 +53,7 @@ class Memory {
     //jogar o valor obtido para o buffer
     _buffer[_bufferIndex] =
         double.tryParse(_value) ?? 0; //se não conseguir pegar o valor, coloca 0
+    print(_buffer);
   }
 
   _allClear() {
