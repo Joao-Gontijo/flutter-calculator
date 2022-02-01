@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Memory {
-  static const operations = const ['%', '/', 'x', '-', '+', '='];
+  static const operations = ['%', '/', 'x', '-', '+', '='];
 
   String _value = '0';
   final _buffer = [0.0, 0.0];
@@ -49,16 +49,17 @@ class Memory {
       _buffer[1] = 0.0;
       _value = _buffer[0].toString();
       _value = _value.endsWith('.0') ? _value.split('.')[0] : _value;
+
+      bool isEqualSign = newOperation == '=';
+      if (isEqualSign) {
+        var __operation;
+        _operation = __operation;
+      } else {
+        _operation = newOperation;
+      }
+      _bufferIndex = isEqualSign ? 0 : 1;
     }
 
-    bool isEqualSign = newOperation == '=';
-    if (isEqualSign) {
-      var __operation;
-      _operation = __operation;
-    } else {
-      _operation = newOperation;
-    }
-    _bufferIndex = isEqualSign ? 0 : 1;
     _wipeValue = true;
   }
 
@@ -97,7 +98,8 @@ class Memory {
   _calculate() {
     switch (_operation) {
       case '%':
-        return _buffer[0] % _buffer[1];
+        //   //x - y% == x - y
+        return _buffer[0] * (_buffer[1] / 100);
       case '/':
         return _buffer[0] / _buffer[1];
       case 'x':
